@@ -10,6 +10,7 @@ function loader(){
    document.getElementById('loading').style.display = 'none';
 }
 setTimeout(loader, 500);
+
 const switchTheme=(e)=> {
     if (e.target.checked) {
         modeDark();
@@ -31,26 +32,46 @@ const modeDark = () => {
     lightMode.style.display = 'block';
     txtMode.innerHTML = 'Light Mode';
 }
-const checkMode = () => {
+const checkMode =()=>{
     let currentTheme = localStorage.getItem('theme');
-    if (currentTheme) {
+    if(currentTheme){
         document.documentElement.setAttribute('data-theme', currentTheme);
-        if (currentTheme === 'dark') {
-            cbxMode.checked = true;
-            modeDark();
-        }
-        else {
-            modeLight();
+        if (cbxMode) {
+            if (currentTheme === 'dark') {
+                cbxMode.checked = true;
+                modeDark();
+            }
+            else {
+                cbxMode.checked = false;
+                modeLight();
+            }
         }
     }
-    else {
+    else{
         document.documentElement.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
-        lightMode.style.display = 'none';
-        darkMode.style.display = 'block';
-        txtMode.innerHTML = 'Dark Mode';
+        if (cbxMode) {
+            if (currentTheme === 'dark') {
+                cbxMode.checked = true;
+                modeDark();
+            }
+            else {
+                cbxMode.checked = false;
+                modeLight();
+            }
+        }
     }
+} 
+//click mode dark-light
+window.onload = checkMode();
+if (cbxMode) {
+    cbxMode.addEventListener('change', switchTheme, false);
+};
+// click menu sub
+window.onclick = function (e) {
+    openAllDropdown(e);
 }
+
 const activeSidebar = () => {
     var icon = document.getElementById('navbar-icon');
     body.classList.toggle('sidebar-expand');
@@ -62,13 +83,6 @@ const activeSidebar = () => {
         icon.classList.add('fa-bars');
         icon.classList.remove('fa-caret-down');
     }
-}
-//click mode dark-light
-window.onload = checkMode();
-cbxMode.addEventListener('change', switchTheme, false);
-// click menu sub
-window.onclick = function (e) {
-    openAllDropdown(e);
 }
 const closeAllDropdown = () => {
     var dropdown = document.getElementsByClassName('dropdown-expand');
