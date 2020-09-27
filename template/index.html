@@ -6,11 +6,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" href="./image/icon/logo.png" type="image/png" sizes="16x16">
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="css/reposive.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<title>Shop admin</title>
+	<title>ABCshop Manager</title>
 </head>
 
-<body class="overlay-scrollbar light">
+<body class="overlay-scrollbar">
+	<!-- loader page -->
+	<div class="loader-page" id="loading">
+		<div class="loader">
+		  <div class="inner one"></div>
+		  <div class="inner two"></div>
+		  <div class="inner three"></div>
+		</div>
+	</div>
 	<!-- header -->
 	<div class="navbar">
 		<ul class="navbar-nav">
@@ -23,19 +32,12 @@
 				<img src="image/icon/logo.png" alt="ABC shop" class="logo">
 			</li>
 		</ul>
+		<!-- search -->
 		<form class="nav-search">
 			<input type="text" name="search" id="" class="navbar-search-input" placeholder="what you looking...? ">
 			<i class="fa fa-search"></i>
 		</form>
 		<ul class="navbar-nav nav-right">
-			<li class="nav-item">
-				<div class="nav-link">
-					<label class="checkbox-theme" for="cbx-theme">
-					 	<input type="checkbox" id="cbx-theme">
-					 	<div class="slider"></div>
-					</label>
-				</div>
-			</li>
 			<!-- notification -->
 			<li class="nav-item dropdown">
 				<div class="nav-link">
@@ -237,15 +239,32 @@
 
 						</li>
 						<li class="dropdown-menu-item">
+							<div class="dropdown-menu-link" id="mode-dark-light">
+								<label class="checkbox-theme" for="cbx-theme">
+								 	<input type="checkbox" id="cbx-theme">
+								 	<i class="fa fa-moon-o" id="dark-mode"></i>
+								 	<i class="fa fa-sun-o" id="light-mode"></i>	
+								</label>
+								<span id="txt-mode"> Dark Mode </span>
+							</div>
+						</li>
+						<li class="dropdown-menu-item">
 							<a href="#" class="dropdown-menu-link">
 								<div>
 									<i class="fa fa-sign-out"></i>
 								</div>
-								<span>Logout</span>
+								<span >Logout</span>
 							</a>
 						</li>
 					</ul>
 				</div>
+<!-- login -->
+			<!-- 	<a href="" class="nav-link">
+					<div class="nav-login">
+						<i class="fa fa-sign-in" aria-hidden="true"></i>
+						<span>Login</span>
+					</div>
+				</a> -->
 			</li>
 		</ul>
 	</div>
@@ -255,7 +274,7 @@
 		<div class="sidebar-nav">
 			<div class="sidebar-nav-item">
 				<a href="#" class="sidebar-nav-link active">
-					<div>
+					<div class="icon-sidebar">
 						<i class="fa fa-home" ></i>
 					</div>
 					<span>
@@ -265,7 +284,7 @@
 			</div>
 			<div class="sidebar-nav-item">
 				<a href="#" class="sidebar-nav-link">
-					<div>
+					<div class="icon-sidebar">
 						<i class="fa fa-th" ></i>
 					</div>
 					<span>
@@ -275,7 +294,7 @@
 			</div>
 			<div class="sidebar-nav-item">
 				<a href="#" class="sidebar-nav-link">
-					<div>
+					<div class="icon-sidebar">
 						<i class="fa fa-user" ></i>
 					</div>
 					<span>
@@ -285,7 +304,7 @@
 			</div>
 			<div class="sidebar-nav-item">
 				<a href="#" class="sidebar-nav-link">
-					<div>
+					<div class="icon-sidebar">
 						<i class="fa fa-newspaper-o"></i>
 					</div>
 					<span>
@@ -295,7 +314,7 @@
 			</div>
 			<div class="sidebar-nav-item">
 				<a href="#" class="sidebar-nav-link">
-					<div>
+					<div class="icon-sidebar">
 						<i class="fa fa-cogs" ></i>
 					</div>
 					<span>
@@ -308,323 +327,354 @@
 	<!-- end menu -->
 	<!-- main content -->
 	<div class="container">
-		<table class="table-scroll small-first-col">
-            <thead>
-                <tr>
-                    <th>bệnh nhân</th>
-                    <th>Tuổi</th>
-                    <th>Tỉnh/Thành phố</th>
-                    <th>Tình trạng</th>
-                    <th>Quốc tịch</th>
-                </tr>
-            </thead>
-            <tbody class="body-half-screen" id="data-tbl">
-                
-                <tr class="ncv-data">
-                    <td>BN24</td>
-                    <td>69</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN23</td>
-                    <td>66</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN22</td>
-                    <td>60</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                 <tr class="ncv-data">
-                    <td>BN24</td>
-                    <td>69</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN23</td>
-                    <td>66</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN22</td>
-                    <td>60</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr> <tr class="ncv-data">
-                    <td>BN24</td>
-                    <td>69</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN23</td>
-                    <td>66</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN22</td>
-                    <td>60</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr> <tr class="ncv-data">
-                    <td>BN24</td>
-                    <td>69</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN23</td>
-                    <td>66</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN22</td>
-                    <td>60</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr> <tr class="ncv-data">
-                    <td>BN24</td>
-                    <td>69</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN23</td>
-                    <td>66</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN22</td>
-                    <td>60</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr> <tr class="ncv-data">
-                    <td>BN24</td>
-                    <td>69</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN23</td>
-                    <td>66</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN22</td>
-                    <td>60</td>
-                    <td>Quảng Ninh</td>
-                    <td>Khỏi</td>
-                    <td>Vương quốc Anh</td>
-                </tr>
-                <tr class="ncv-data">
-                    <td>BN21</td>
-                    <td>61</td>
-                    <td>Hà Nội</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN20</td>
-                    <td>28</td>
-                    <td>Hà Nội</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN19</td>
-                    <td>64</td>
-                    <td>Hà Nội</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN18</td>
-                    <td>27</td>
-                    <td>Ninh Bình</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN17</td>
-                    <td>26</td>
-                    <td>Hà Nội</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN16</td>
-                    <td>50</td>
-                    <td>Vĩnh Phúc</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN15</td>
-                    <td>0</td>
-                    <td>Vĩnh Phúc</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN14</td>
-                    <td>55</td>
-                    <td>Vĩnh Phúc</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN13</td>
-                    <td>29</td>
-                    <td>Vĩnh Phúc</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN12</td>
-                    <td>16</td>
-                    <td>Vĩnh Phúc</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN11</td>
-                    <td>49</td>
-                    <td>Vĩnh Phúc</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN10</td>
-                    <td>42</td>
-                    <td>Vĩnh Phúc</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN9</td>
-                    <td>30</td>
-                    <td>Vĩnh Phúc</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN8</td>
-                    <td>29</td>
-                    <td>Vĩnh Phúc</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN7</td>
-                    <td>73</td>
-                    <td>Hồ Chí Minh</td>
-                    <td>Khỏi</td>
-                    <td>Hoa Kỳ</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN6</td>
-                    <td>25</td>
-                    <td>Khánh Hòa</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN5</td>
-                    <td>23</td>
-                    <td>Vĩnh Phúc</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN4</td>
-                    <td>29</td>
-                    <td>Vĩnh Phúc</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN3</td>
-                    <td>25</td>
-                    <td>Thanh Hóa</td>
-                    <td>Khỏi</td>
-                    <td>Việt Nam</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN2</td>
-                    <td>28</td>
-                    <td>Hồ Chí Minh</td>
-                    <td>Khỏi</td>
-                    <td>Trung Quốc</td>
-                </tr>
-                
-                <tr class="ncv-data">
-                    <td>BN1</td>
-                    <td>66</td>
-                    <td>Hồ Chí Minh</td>
-                    <td>Khỏi</td>
-                    <td>Trung Quốc</td>
-                </tr>
-                
-            </tbody>
-            <tbody class="body-half-screen" id="data-search"></tbody>
-        </table>
+		<div class="row">
+			<div class="col-12 col-m-12 col-sm-12">
+				<div class="container-header">
+					<img src="image/icon/logo.png" alt="ABCShop">
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-3 col-m-6 col-sm-6">
+				<div class="counter">
+					<p>
+						<i class="fa fa-pie-chart"></i>
+					</p>
+					<h3>100+</h3>
+					<p>Tổng sản phẩm</p>
+				</div>
+			</div>
+			<div class="col-3 col-m-6 col-sm-6">
+				<div class="counter">
+					<p>
+						<i class="fa fa-users" ></i>
+					</p>
+					<h3>0897</h3>
+					<p>Tổng thành viên</p>
+				</div>
+			</div>
+			<div class="col-3 col-m-6 col-sm-6">
+				<div class="counter">
+					<p>
+						<i class="fa fa-newspaper-o"></i>
+					</p>
+					<h3>100+</h3>
+					<p>Số bài đăng</p>
+				</div>
+			</div>
+			<div class="col-3 col-m-6 col-sm-6">
+				<div class="counter">
+					<p>
+						<i class="fa fa-laptop"></i>
+					</p>
+					<h3>100+</h3>
+					<p>Số người<br/> truy cập</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-8 col-m-12 col-sm-12">
+				<div class="card">
+					<div class="card-header">
+						<h3>
+							Danh sách thành viên
+							<i class="fa fa-users"></i>
+						</h3>
+						<div class="card-header-right">
+							<a href="">Xem tòan bộ</a>
+							<i class="fa fa-ellipsis-h"></i>
+						</div>
+					</div>
+					<div class="card-content overlay-scrollbar">
+						<table>
+							<thead>
+								<tr>
+									<th>stt</th>
+									<th>Tên</th>
+									<th>Ngày sinh</th>
+									<th>Địa chỉ</th>
+									<th>Số điện thoại</th>
+									<th>Email</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+								<tr>
+									<td>1</td>
+									<td>React</td>
+									<td>1/1/2020</td>
+									<td>Tran Anh Tuat,TPHCM</td>
+									<td>0123456789</td>
+									<td>test@gmail.com</td>
+									<!-- <td>
+										<span class="dot">
+											<i class="bg-success"></i>
+											Completed
+										</span>
+									</td> -->
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-4 col-m-12 col-sm-12">
+				<div class="card">
+					<div class="card-header">
+						<h3>
+							Sản phẩm của các hãng
+						</h3>
+					</div>
+					<div class="card-content">
+						<div class="progress-wrapper">
+							<p>
+								Casio
+								<span class="float-right">50%</span>
+							</p>
+							<div class="progress">
+								<div class="bg-success" style="width: 50%"></div>
+							</div>
+						</div>
+						<div class="progress-wrapper">
+							<p>
+								Citizent
+								<span class="float-right">90%</span>
+							</p>
+							<div class="progress">
+								<div class="bg-primary" style="width:90%"></div>
+							</div>
+						</div>
+						<div class="progress-wrapper">
+							<p>
+								G-shock
+								<span class="float-right">40%</span>
+							</p>
+							<div class="progress">
+								<div class="bg-warning" style="width:40%"></div>
+							</div>
+						</div>
+						<div class="progress-wrapper">
+							<p>
+								DANIEL WELLINGTON
+								<span class="float-right">20%</span>
+							</p>
+							<div class="progress">
+								<div class="bg-danger" style="width:20%"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>	
 	</div>
 	<!--  end main content -->
 	<script type="text/javascript" src="./js/main.js"></script>
