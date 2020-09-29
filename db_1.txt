@@ -1,0 +1,31 @@
+amin: 
+	- name
+	- username
+	- pasword
+	- avatar
+	- email
+	- sdt
+	- role( admin)
+user: 
+	-  fist name 
+	- last name
+	- birthDay
+	- sdt
+	- giới tính (true: nam, false: nữ)
+	- email (email goggle)
+	- address
+	- avatar
+	- password
+product:
+	- name 
+	- giá 
+	- mô tả
+	- thương hiệu
+	- ngày nhập 
+	- số lượng
+	- thể loại ( nón lưỡi trai , nón két bằng, nón lưới, nón vành)
+	- hình ảnh
+giỏ hàng: 
+	- mã người dùng 
+	- mã sản phẩm
+	- số lượng 
