@@ -6,12 +6,12 @@ const txtMode = document.getElementById('txt-mode');
 const itemMode = document.getElementById('mode-dark-light');
 
 
-function loader(){
-   document.getElementById('loading').style.display = 'none';
+function loader() {
+    document.getElementById('loading').style.display = 'none';
 }
 setTimeout(loader, 500);
 
-const switchTheme=(e)=> {
+const switchTheme = (e) => {
     if (e.target.checked) {
         modeDark();
     } else {
@@ -32,9 +32,9 @@ const modeDark = () => {
     lightMode.style.display = 'block';
     txtMode.innerHTML = 'Light Mode';
 }
-const checkMode =()=>{
+const checkMode = () => {
     let currentTheme = localStorage.getItem('theme');
-    if(currentTheme){
+    if (currentTheme) {
         document.documentElement.setAttribute('data-theme', currentTheme);
         if (cbxMode) {
             if (currentTheme === 'dark') {
@@ -47,7 +47,7 @@ const checkMode =()=>{
             }
         }
     }
-    else{
+    else {
         document.documentElement.setAttribute('data-theme', 'light');
         localStorage.setItem('theme', 'light');
         if (cbxMode) {
@@ -61,7 +61,7 @@ const checkMode =()=>{
             }
         }
     }
-} 
+}
 //click mode dark-light
 window.onload = checkMode();
 if (cbxMode) {
