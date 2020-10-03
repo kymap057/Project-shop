@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config({path:'../.env'});
 
 const UserSchemas= new mongoose.Schema({
     fistName: {
@@ -51,11 +53,34 @@ const UserSchemas= new mongoose.Schema({
     },
     listCart:[{
         type: mongoose.Schema.Types.ObjectId,
+    }],
+    tokens:[{
+        token:{
+            type:String,
+            require:true
+        }
     }]
 },{
     timestamps:true
 });
 
+UserSchemas.methods.toJSON = function(){
+    let user = this.toObject();
+    delete user.password;
+    delete user.role;
+    delete user.avatar;
+    delete user.tokens;
+    return user;
+}
+UserSchemas.methods.generateAuthToken = async function () {
+    const userToken = this;
+    key = process.env.KEY_JWT;
+    const token = await jwt.sign({ _id: userToken._id.toString() },key);//
+    userToken.tokens = userToken.tokens.concat({token});
+    //console.log(userToken.tokens)
+    await userToken.save();
+    return token;
+};
 UserSchemas.statics.findUser= async (email,password)=>{
     try {
         let user = await Users.findOne({email});

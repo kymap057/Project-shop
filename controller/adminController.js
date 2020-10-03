@@ -4,22 +4,48 @@ exports.loginAdmin = async (req,res,next)=>{
     try {
         let user = await User.findUser(req.body.email,req.body.password);
         if(!user){
-            res.status(500).json({
-                messenger: 'login fail...!'
-            })   
+            console.log('sai mk')
+            return res.redirect('/login');
         }
-        req.session.user= {_id:user._id,name:user.email};
-        // req.user= user;
-        // res.status(200).json({
-        //     messenger: 'login success..!!',
-        //     data: user
-        // });
+        let token = await user.generateAuthToken();
+        req.session.user = {
+            data:{
+                id: user._id,
+                email: user.email,
+                version: user.__v
+            },
+            token: token
+        }
+        console.log(user.__v, user.role)
         next();
     } catch (error) {
-        req.session.user = false;
-        res.status(500).json({
-            messenger: 'Error...!',
-            error: error
-        });
+        
+        res.redirect('/login');
+        console.log('lỗi')
     }
 };
+module.exports.logoutAdmin = async (req,res,next)=>{
+    try {
+        req.user.tokens = req.user.tokens.filter((token) => {
+            return token.token !== req.token
+        });
+        await req.user.save();
+        req.session.user= undefined;
+        console.log(req.session.user)
+        if(!req.session.user){
+            res.redirect('/login');
+        }
+    } catch (e) {
+        res.redirect('/login');
+    }
+}
+module.exports.logoutAdminAllVersion = async (req,res,next)=>{
+    try {
+        req.user.tokens =[];
+        req.session.user = undefined;
+        await req.user.save();
+        res.redirect('/login');
+    } catch (error) {
+        res.send(error);
+    }
+}
