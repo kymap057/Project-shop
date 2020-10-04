@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/',auth,pageController.getHome)
 router.get('/home',auth,pageController.getHome);
 router.get('/login',pageController.getPageLogin);
-router.post('/login',adminController.loginAdmin,pageController.postLogin);
-router.get('/logout',auth,adminController.logoutAdmin)
+router.post('/login',pageController.postLogin);
+router.get('/logout',auth,pageController)
 router.get('/logoutAll',auth,adminController.logoutAdminAllVersion);
 module.exports = router;

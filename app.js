@@ -3,11 +3,11 @@ const app = express();
 const path = require('path')
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const flash = require('connect-flash');
 const productRouter = require('./router/productRouter');
 const userRouter = require('./router/userRouter');
 const pageRouter = require('./client/pageAdminRouter');
 const AdminRouter = require('./router/adminRouter');
-const { json } = require('body-parser');
 require('dotenv').config();
 require('./db/connectDB');
 
@@ -22,6 +22,8 @@ app.engine('ejs',engine);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(flash());
+
 
 app.use(session({
     secret:"mysecret",

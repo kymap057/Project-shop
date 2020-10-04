@@ -4,24 +4,25 @@ exports.loginAdmin = async (req,res,next)=>{
     try {
         let user = await User.findUser(req.body.email,req.body.password);
         if(!user){
-            console.log('sai mk')
-            return res.redirect('/login');
+            return res.status(404).json({
+                messenger: 'login fail...!',
+                code: 404
+            });
         }
         let token = await user.generateAuthToken();
-        req.session.user = {
-            data:{
-                id: user._id,
-                email: user.email,
-                version: user.__v
-            },
+        res.status(200).json({
+            messenger:'login success',
+            code: 200,
+            data: user.toJSON(),
             token: token
-        }
+        });
         console.log(user.__v, user.role)
         next();
     } catch (error) {
-        
-        res.redirect('/login');
-        console.log('lỗi')
+        res.status(500).json({
+            messenger: 'login fail DB ...!',
+            code: 500
+        });
     }
 };
 module.exports.logoutAdmin = async (req,res,next)=>{
@@ -30,13 +31,15 @@ module.exports.logoutAdmin = async (req,res,next)=>{
             return token.token !== req.token
         });
         await req.user.save();
-        req.session.user= undefined;
-        console.log(req.session.user)
-        if(!req.session.user){
-            res.redirect('/login');
-        }
+        res.status(200).json({
+            messenger: 'logout Success..!',
+            code: 200
+        })
     } catch (e) {
-        res.redirect('/login');
+        res.status(500).json({
+            messenger: 'logout fail..!',
+            code: 500
+        })
     }
 }
 module.exports.logoutAdminAllVersion = async (req,res,next)=>{
@@ -44,8 +47,14 @@ module.exports.logoutAdminAllVersion = async (req,res,next)=>{
         req.user.tokens =[];
         req.session.user = undefined;
         await req.user.save();
-        res.redirect('/login');
+        res.status(200).json({
+            messenger: 'logout Success..!',
+            code: 200
+        })
     } catch (error) {
-        res.send(error);
+        res.status(500).json({
+            messenger: 'logout fail..!',
+            code: 500
+        })
     }
 }
