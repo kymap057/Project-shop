@@ -1,9 +1,10 @@
+const { response } = require('express');
 const fetch = require('node-fetch');
 
 
 
 module.exports.getPageLogin = (req, res, next) => {
-    if(req.session.user){
+    if (req.session.user) {
         return res.redirect('/')
     }
     res.render('./admin/login', {
@@ -13,7 +14,6 @@ module.exports.getPageLogin = (req, res, next) => {
 }
 module.exports.getHome = (req, res, next) => {
     if (req.session.user) {
-        console.log(req.user)
         return res.render('./admin/home', {
             title: 'Home'
         })
@@ -25,10 +25,10 @@ module.exports.postLogin = async (req, res, next) => {
         email: req.body.email,
         password: req.body.password
     };
-    let host = req.headers.origin;
+    let host = req.headers.host;
     let url = `${host}/admin/login`
     console.log(url)
-    fetch(url, {
+    fetch(`http://${url}`, {
         method: 'POST',
         headers: {
             'content-Type': 'application/json'
@@ -51,21 +51,36 @@ module.exports.postLogin = async (req, res, next) => {
             }
             else {
                 console.log('login fail');
-                req.flash('ErrorLogin', 'password or email incorrect');
+                req.flash('ErrorLogin', 'password or email wrong');
                 res.redirect('/login');
             }
         })
         .catch(err => {
             console.log(err);
-            req.flash('ErrorLogin', 'password or email incorrect');
+            req.flash('ErrorLogin', 'password or email wrong');
             res.redirect('/login');
         });
 }
-module.exports.getLogout = (req,res,next)=>{
-    req.session.user = undefined;
-    req.user = undefined;
-    res.redirect('/login');
-}
-module.exports.postLogout = (req,res,next)=>{
-    
+module.exports.getLogout = (req, res, next) => {
+    let host = req.headers.host;
+    let url = `http://${host}/admin/logout`
+    console.log(url)
+    let data = {
+        token: req.token
+    }
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(() => {
+            console.log('user logout');
+            req.session.user = undefined;
+            req.user = undefined;
+            req.token = undefined;
+            res.redirect('/login');
+        })
+        .catch(err => console.log(err));
 }

@@ -26,7 +26,7 @@ app.use(flash());
 
 
 app.use(session({
-    secret:"mysecret",
+    secret:"projectabcshop",
     cookie:{
         maxAge:1000*60*60
     },
