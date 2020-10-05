@@ -6,7 +6,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const productRouter = require('./router/productRouter');
 const userRouter = require('./router/userRouter');
-const pageRouter = require('./client/pageAdminRouter');
+const pageRouter = require('./client/router/pageAdminRouter');
 const AdminRouter = require('./router/adminRouter');
 require('dotenv').config();
 require('./db/connectDB');

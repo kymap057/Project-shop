@@ -1,7 +1,5 @@
-const { response } = require('express');
 const fetch = require('node-fetch');
-
-
+const moment = require('moment');
 
 module.exports.getPageLogin = (req, res, next) => {
     if (req.session.user) {
@@ -13,12 +11,9 @@ module.exports.getPageLogin = (req, res, next) => {
     })
 }
 module.exports.getHome = (req, res, next) => {
-    if (req.session.user) {
-        return res.render('./admin/home', {
+   res.render('./admin/home', {
             title: 'Home'
         })
-    }
-    res.redirect('/login')
 }
 module.exports.postLogin = async (req, res, next) => {
     let data = {
@@ -83,4 +78,19 @@ module.exports.getLogout = (req, res, next) => {
             res.redirect('/login');
         })
         .catch(err => console.log(err));
+}
+module.exports.getProfile = (req,res,next)=>{
+    let user = {
+        fistName: req.user.fistName,
+        lastName: req.user.lastName,
+        birthday: moment(req.user.birthday).format('DD/MM/YYYY'),
+        gender: (req.user.Gender)?'nam':'nữ',
+        phone: req.user.phoneNumber,
+        email: req.user.email,
+        address: `${req.user.address.detail}, ${req.user.address.city}`
+    }
+    res.render('./admin/profile',{
+        title: 'Profile',
+        data: user
+    })
 }

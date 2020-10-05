@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../models/managerShop');
 
 exports.loginAdmin = async (req,res,next)=>{
     try {
@@ -58,3 +58,20 @@ module.exports.logoutAdminAllVersion = async (req,res,next)=>{
         })
     }
 }
+exports.createAdmin= async (req,res,next)=>{
+    try {
+        const newUser =  new User(req.body);
+        await newUser.save();
+        res.status(201).json({
+            messenger: "create user successful...",
+            method:"POST",
+            code: 201,
+            data:newUser
+        });
+    } catch (e) {
+        res.status(500).json({
+           messenger: e,
+           code: 500
+        })
+    }
+};
