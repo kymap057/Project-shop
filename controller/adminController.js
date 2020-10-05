@@ -1,9 +1,11 @@
+const Users = require('../models/managerShop');
 const User = require('../models/managerShop');
 
-exports.loginAdmin = async (req,res,next)=>{
+
+exports.loginAdmin = async (req, res, next) => {
     try {
-        let user = await User.findUser(req.body.email,req.body.password);
-        if(!user){
+        let user = await User.findUser(req.body.email, req.body.password);
+        if (!user) {
             return res.status(404).json({
                 messenger: 'login fail...!',
                 code: 404
@@ -11,7 +13,7 @@ exports.loginAdmin = async (req,res,next)=>{
         }
         let token = await user.generateAuthToken();
         res.status(200).json({
-            messenger:'login success',
+            messenger: 'login success',
             code: 200,
             data: user.toJSON(),
             token: token
@@ -25,7 +27,7 @@ exports.loginAdmin = async (req,res,next)=>{
         });
     }
 };
-module.exports.logoutAdmin = async (req,res,next)=>{
+module.exports.logoutAdmin = async (req, res, next) => {
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
@@ -41,10 +43,10 @@ module.exports.logoutAdmin = async (req,res,next)=>{
             code: 500
         })
     }
-}
-module.exports.logoutAdminAllVersion = async (req,res,next)=>{
+};
+module.exports.logoutAdminAllVersion = async (req, res, next) => {
     try {
-        req.user.tokens =[];
+        req.user.tokens = [];
         req.session.user = undefined;
         await req.user.save();
         res.status(200).json({
@@ -57,21 +59,45 @@ module.exports.logoutAdminAllVersion = async (req,res,next)=>{
             code: 500
         })
     }
-}
-exports.createAdmin= async (req,res,next)=>{
+};
+exports.createAdmin = async (req, res, next) => {
     try {
-        const newUser =  new User(req.body);
+        const newUser = new User(req.body);
         await newUser.save();
         res.status(201).json({
             messenger: "create user successful...",
-            method:"POST",
+            method: "POST",
             code: 201,
-            data:newUser
+            data: newUser
         });
     } catch (e) {
         res.status(500).json({
-           messenger: e,
-           code: 500
+            messenger: e,
+            code: 500
         })
     }
+};
+exports.getAdminProfile = async (req, res, next) => {
+    try {
+        let user = await Users.findById(req.params.id);
+        if (!user) {
+            return res.status.json({
+                messenger: 'user not found...!',
+                code: 404
+            });
+        }
+        res.status(200).json({
+            messenger:'ok...!',
+            code: 200,
+            data: user
+        });
+    } catch (error) {
+        res.status(500).json({
+            messenger: error,
+            code:500
+        })
+    }
+};
+exports.updateInfAdmin = async (req, res, next) => {
+    console.log('...')
 };

@@ -29,7 +29,9 @@ const authClient = async (req, res, next) => {
 }
 const authAdmin = async (req, res, next) => {
     try {
-        let token = req.body.token;
+        // console.log(req.headers)
+        let token = req.headers.authorization;
+        // console.log(token)
         let key = process.env.KEY_JWT;
         let decode = jwt.verify(token, key);
         const user = await Admin.findOne({ _id: decode._id, 'tokens.token': token });
@@ -44,7 +46,7 @@ const authAdmin = async (req, res, next) => {
         next();
     } catch (e) {
         res.status(500).json({
-            messenger: e,
+            messenger: 'authentication fail...!',
             code: 500
         })
     }

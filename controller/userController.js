@@ -1,3 +1,4 @@
+const Users = require('../models/managerShop');
 const User = require('../models/user');
 
 exports.getAllUser = async (req,res,next)=>{
@@ -39,4 +40,26 @@ exports.createUser= async (req,res,next)=>{
             code: 500
          })
      }
+};
+exports.deleteUser = async(req,res,next)=>{
+    try {
+        let user = await Users.findById(req.params.id);
+        if(!user){
+            return res.status(404).json({
+                messenger: 'user not found...!',
+                code: 404
+            });
+        }
+        await user.remove();
+        res.status(200).json({
+             messenger:'delete user success...!',
+             code: 200
+        });
+        console.log('delete a user');
+    } catch (error) {
+        res.status(500).json({
+            messenger: error,
+            code: 500
+        });
+    }
 };

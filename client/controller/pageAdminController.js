@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 const moment = require('moment');
+const { replaceOne } = require('../../models/product');
 
 module.exports.getPageLogin = (req, res, next) => {
     if (req.session.user) {
@@ -11,9 +12,9 @@ module.exports.getPageLogin = (req, res, next) => {
     })
 }
 module.exports.getHome = (req, res, next) => {
-   res.render('./admin/home', {
-            title: 'Home'
-        })
+    res.render('./admin/home', {
+        title: 'Home'
+    })
 }
 module.exports.postLogin = async (req, res, next) => {
     let data = {
@@ -59,16 +60,13 @@ module.exports.postLogin = async (req, res, next) => {
 module.exports.getLogout = (req, res, next) => {
     let host = req.headers.host;
     let url = `http://${host}/admin/logout`
-    console.log(url)
-    let data = {
-        token: req.token
-    }
+    console.log(url);
     fetch(url, {
         method: 'POST',
         headers: {
-            'content-Type': 'application/json'
+            'content-Type': 'application/json',
+            'authorization': req.token
         },
-        body: JSON.stringify(data)
     })
         .then(() => {
             console.log('user logout');
@@ -79,18 +77,37 @@ module.exports.getLogout = (req, res, next) => {
         })
         .catch(err => console.log(err));
 }
-module.exports.getProfile = (req,res,next)=>{
-    let user = {
-        fistName: req.user.fistName,
-        lastName: req.user.lastName,
-        birthday: moment(req.user.birthday).format('DD/MM/YYYY'),
-        gender: (req.user.Gender)?'nam':'nữ',
-        phone: req.user.phoneNumber,
-        email: req.user.email,
-        address: `${req.user.address.detail}, ${req.user.address.city}`
-    }
-    res.render('./admin/profile',{
-        title: 'Profile',
-        data: user
+module.exports.getProfile = (req, res, next) => {
+    let id = req.user._id;
+    let host = req.headers.host;
+    let url = `http://${host}/admin/${id}`
+    console.log(url);
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'content-Type': 'application/json',
+            'authorization': req.token
+        },
     })
+        .then(response => { return response.json() })
+        .then(data => {
+            if(!data.code===200){
+                return res.redirect('/');
+            }
+            let userData = data.data;
+            let user = {
+                fistName: userData.fistName,
+                lastName: userData.lastName,
+                birthday: moment(userData.birthday).format('DD/MM/YYYY'),
+                gender: (userData.Gender) ? 'nam' : 'nữ',
+                phone: userData.phoneNumber,
+                email: userData.email,
+                address: `${userData.address.detail}, ${userData.address.city}`
+            };
+            res.render('./admin/profile', {
+                title: 'Profile',
+                data: user
+            });
+        })
+        .catch(() => res.redirect('/'));
 }
