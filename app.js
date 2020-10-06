@@ -9,9 +9,8 @@ const userRouter = require('./router/userRouter');
 const pageRouter = require('./client/router/pageAdminRouter');
 const AdminRouter = require('./router/adminRouter');
 require('dotenv').config();
-require('./db/connectDB');
-
-
+//require('./db/connectDB');
+require('./db/connectMySqlDB');
 const publicDirectoryPath= path.join(__dirname,'./public');
 
 app.set('view engine','ejs');
